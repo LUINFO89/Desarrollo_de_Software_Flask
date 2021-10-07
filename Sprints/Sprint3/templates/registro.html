@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeropuerto Flaminio Suárez Camacho </title>
+    <link rel="shortcut icon" href="./images/airplane.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/estilos.css">
+    
+</head>
+<body>
+    <div class="general">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <h2 class="nav__title">Aeropuerto Flaminio Suárez Camacho </h2>
+            </div>
+            <ul class="nav__link nav__link--menu">
+                <li class="nav__items"><a href="#" class="nav__links">Inicio</a></li> 
+                <li class="nav__items"><a href="#" class="nav__links">REGISTRO</a></li>  
+                <li class="nav__items"><a href="#" class="nav__links">Vuelos</a></li>  
+                <li class="nav__items"><a href="#" class="nav__links">Reservas</a></li>  
+                
+                <img src="./images/close.svg" class="nav-close" >
+            </ul>
+            <div class="nav-menu">
+                <img src="./images/menu.svg" class="nav-img" alt="">
+            </div>
+        </nav>
+    <section class="formularioRegistro">
+         
+            <h1>Welcome! </h1>
+            <div class="form">
+                <form  name="formRegistro" onsubmit="validar_formulario()">
+                    <fieldset>
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" required> <br/> <br/>
+                        <label for="correo">Correo</label>
+                        <input type="email" id="email" required> <br/> <br/>
+                        <label for="contrasena">Contraseña</label>
+                        <input type="text" id="contrasena" required>
+                        <img class="imgOjitoPassword" src="/static/images/eye.png" alt="" onmouseover="mostrarPassword()" onmouseout="ocultarPassword()"> <br/> <br/>
+                        <input type="checkbox" id="declaracion">Declaro haber leído y aceptar las
+                        condiciones generales del programa y la normativa sobre protección de datos</input><br/> <br/>
+                        <!-- <button type="button"  onclick="validar_formulario()">Enviar</button> -->
+                        <a href="" >Recordar contraseña</a>
+                        <button type="submit">Enviar</button>
+                        <button type="submit">Register</button>
+
+                    </fieldset>
+                </form>
+            </div>
+            </section>
+    </div>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="containerfooter">
+          <span class="text-muted">Copyright © 2021-2021 grupo 2 Misiontic 2022 .</span>
+          
+        </div>
+      </footer>
+
+</body>
+</html>
