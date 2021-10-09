@@ -28,24 +28,39 @@ def index():
     #si ya inicio sesion entonces ingresa a reservas y ver vuelos 
     #si no  se dirige a la pagina de menu principal
     return render("index.html")
+    
+
+
 @app.route('/registro', methods=["GET","POST"])
 def registro():  
-    return"""pagina registro"""
+    return render ("registro.html")
+
+
 @app.route('/login', methods=["GET","POST"])
 def ingreso():
-    return"pagina de ingreso"
-@app.route('/reserva', methods=["GET","POST"])
+    return render ("login.html")
+
+
+@app.route('/reservas', methods=["GET","POST"])
 def reserva():
     return"pagina de reserva"
+
+
 @app.route('/vuelos', methods=["GET"])
 def vuelos():
     return"pagina para ver los vuelos "
+
+
 @app.route('/calificacion', methods=["GET","POST"])
 def calificacion():
     return"pagina para ver la calififcaciones de los usuarios "
+
+
 @app.route('/compras', methods=["GET","POST"])
 def compra():
     return"pagina para ver compras "
+
+
 
 @app.route('/usuarios/<id_usuario>', methods=["GET","POST"])
 def usuario_info(id_usuario):
@@ -53,6 +68,8 @@ def usuario_info(id_usuario):
         return f"Estas viendo el perfil del usauario{id_usuario}"
     else:
         return f"Error el usuario {id_usuario} no existe"
+
+
 
 @app.route('/comentarios/<id_comentario>', methods=["GET"])
 def comentarios(id_comentario):

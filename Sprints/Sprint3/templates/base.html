@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeropuerto Flaminio Suárez Camacho </title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='/images/airplane.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+    
+<body>
+    
+    <header class="hero">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <h2 class="nav__title">Aeropuerto Flaminio Suárez Camacho.</h2>
+            </div>
+            <ul class="nav__link nav__link--menu">
+                <li class="nav__items"><a href="/index" class="nav__links">Inicio</a></li> 
+                <li class="nav__items"><a href="/login" class="nav__links">Login</a></li>  
+                <li class="nav__items"><a href="/vuelos" class="nav__links">Vuelos</a></li>  
+                <li class="nav__items"><a href="/reservas" class="nav__links">Reservas</a></li>  
+        </nav>
+       
+    
+    {% block contenido %}
+        
+    {% endblock %}
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="containerfooter">
+          <span class="text-muted">Copyright © 2021-2021 grupo 2 Misiontic 2022 .</span>
+          
+        </div>
+      </footer>
+</body>
+</html>
