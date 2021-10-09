@@ -9,7 +9,7 @@ from flask import request
 
 app = Flask(__name__)
 
-lista_usuarios = ["Andres","Maria","Fernanda"]
+lista_usuarios = ["Andres","Maria","Fernanda","luis"]
 lista_noticias = {
     1: {'titulo' : "noticia 1" , 'cuerpo': "1 2 3", 'imagenes': ['img 1', 'img 1' , 'img 1']},
     2: {'titulo' : "noticia 2" , 'cuerpo': "1 2 3", 'imagenes': ['img 1', 'img 1' , 'img 1']},
