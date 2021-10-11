@@ -6,26 +6,26 @@
      
     <section class="formularioRegistro">
          
-            <h1>Welcome! </h1>
+            <h1>Welcome! Login </h1>
             <div class="form">
-                <form  name="formRegistro" onsubmit="validar_formulario()">
-                    <fieldset>
+                <form  name="formRegistro" onsubmit="" action="/login" method="POST">
+
+                    <fieldset >
+                        {{ csrf_tokem }}
                         <label for="nombre">Nombre</label>
                         <input type="text" id="nombre" required> <br/> <br/>
                         <label for="correo">Correo</label>
                         <input type="email" id="email" required> <br/> <br/>
                         <label for="contrasena">Contraseña</label>
-                        <input type="text" id="contrasena" required>
-                        <img class="imgOjitoPassword" src="/static/images/eye.png" alt="" onmouseover="mostrarPassword()" onmouseout="ocultarPassword()"> <br/> <br/>
-                        <input type="checkbox" id="declaracion">Declaro haber leído y aceptar las
-                        condiciones generales del programa y la normativa sobre protección de datos</input><br/> <br/>
-                        <!-- <button type="button"  onclick="validar_formulario()">Enviar</button> -->
+                        <input type="password" id="contrasena"  required>
+                        <br/> <br/>
                         <a href="" >Recordar contraseña</a>
                         <button type="submit">Enviar</button>
                         <button type="submit">Register</button>
-
                     </fieldset>
+                    
                 </form>
+
             </div>
             </section>
     </div>
