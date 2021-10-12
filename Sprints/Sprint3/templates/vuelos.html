@@ -2,37 +2,234 @@
 
 
 {% block contenido%}
-        <div class="general">
-            <div class="vuelos">
-                <br>
-                <br>
-                <h1>VER VUELOS</h1>
-                <br>
-                <br>
 
-                <form action="/salir" method="POST">
-                    <fieldset>
-                        {{ csrf_tokem }}
+    <div class="general">
+    
+        <div class="subtitulo">
+            <br>
+            <h1 class = "izquierda">Vuelos</h1>
+            <br>
+            <p class ="miga">Dashboard / Vuelos</p>
+        </div>
 
-                        <input type="text" placeholder="codigo de vuelo" size="20px">
-                        <input type="submit" onsubmit="vuelos()" action=" " value="VER VUELOS" >
-                        <br>
-                        <br>
-                        <textarea></textarea>
-
-                        <input type="submit" value="salir"> 
-
-
-                    </fieldset>
-                   
-                </form>
-
+        <div class="sections border_blue">
+       
+            <div class="div_60 border_orange">
+                <div class="div_busqueda">
+                    <div class="items">
+                        <input type="text" placeholder="Buscar" class="input-form">
+                    </div>
+                    <div class="items">
+                        <input type="date"  class="input-form">
+                    </div>
+                    <div class="items">
+                        <button class="btn btn-form">
+                            Buscar
+                        </button>
+                    </div>
+                    <div>
+                        <div>
+                            <button class="btn btn-form">Agregar</button>
+                            <button class="btn btn-form">Editar</button>
+                            <button class="btn btn-form">Eliminar</button>
+                            <button class="btn btn-form">salir</button>
+                        </div>
+                </div>
+                <div class="div-table">
+                    <table>
+                        <thead>
+                            <th>checked</th>
+                            <th>Code</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0159</td>
+                                <td>Bogota</td>
+                                <td>Cartagena</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td>0759</td>
+                                <td>Medellin</td>
+                                <td>Cartagena</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+    
+        </div>
 
-            <div class="form">
+        
 
-            
-            </div>
-        </div>   
+    </div>
 
-    {% endblock %}
+
+{% endblock %}

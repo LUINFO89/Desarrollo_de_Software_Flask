@@ -26,6 +26,10 @@ body{
     padding: var(--pading-container);
     
 }
+.titulo{
+    text-align: center;
+    margin-bottom: 40px;
+}
 
 .hero{
     width: 100%;
@@ -37,6 +41,11 @@ body{
     grid-template-rows: 100px 1fr;
     color: aliceblue;
 
+}
+img{
+    width: 200px;
+    height: 200px;
+    align-items: center;
 }
 .general{
     width: 100%;
@@ -83,6 +92,117 @@ body{
     align-items: center;
 }
 
+
+
+/* Fer...*/
+/* Tìtulo sección y miga de pan*/
+.subtitulo{
+    margin-left: 20%;
+    text-align: left; 
+    align-items: left
+}
+
+.izquierda{
+    text-align: left;
+}
+
+.miga{
+    width: 300px;
+    background-color:rgba(17, 14, 14, .42);
+    padding: 6px 5px 6px 5px;
+    margin: 1px; 
+    border-radius: 6px;
+    text-decoration: none; 
+}
+
+/*div sections*/
+    .sections div{
+        display: inline-block;
+        margin-top: 0px !important;
+    }
+
+    .div_20{
+        width: 19%;
+    }
+
+    .div_60{
+        width: 60%;
+    }
+
+    .menu_aside .btn{
+        display: block;
+        padding: 20px 8px;
+    }
+
+    .btn{
+        border-radius: 3px;
+        width: 50%;
+        text-align: left;
+       
+    }
+
+    .div_busqueda, .div-table{
+        width: 100%;
+    }
+
+    .items{
+        padding: 5px;
+        width: 33%;
+    }
+
+    .btn-form, .input-form{
+        width: 90%;
+        padding: 5px;
+    }
+
+    .btn-form{
+        width: 150px;
+        background-color: #6565e5;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .div-table{
+        padding:8px;
+        width: 90%;
+        max-width: 800px;
+    }
+    
+    .div-table table{
+        width: 100%;
+        background-color:rgba(255,255,255,.52);
+        color: black;
+       
+    }
+
+    .menu_crud .btn{
+        display: block;
+        margin: auto;
+        width: 150px;
+        background-color: #6565e5;
+        color: white;
+        border-radius: 5px;
+        text-align: center;
+        padding: 15px 5px;
+        margin-top: 60px;
+    }
+
+/*testeo*/
+/*
+.border_red{
+    border: 1px solid red;
+}
+
+.border_orange{
+    border: 1px solid orange;
+}
+
+.border_blue{
+    border: 1px solid blue;
+}
+*/
+/* Fin Fer...*/
 .nav__title{
     font-weight: 300;
 }
@@ -148,7 +268,6 @@ body{
     display:grid;
     margin-top: 10px;
     --padding-container:0;
-    grid-auto-rows: max-content;
     text-align: center;
     color: #f6f6f6;
 }

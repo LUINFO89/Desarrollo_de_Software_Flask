@@ -20,7 +20,8 @@ lista_vuelos = {
    2: "Bogota",
    3: "SantaMarta"
 }
-lista_comentarios = {
+
+lista_calificacion = {
    1: "Excelente",
    2: "Bueno",
    3: "Regular",
@@ -52,23 +53,17 @@ def ingreso():
     # cuando este dentro del sistema podra ver su perfil y editarlo 
     # cuando este dentro del sistema podra ver crear reserva 
     # si no esta loqeado se envia a menu principal donde tendra noticias generales del aeropuesto
-    # si no esta logeado se solicitara crear un usuario
+    # si no esta logeado se solicitara crear un usuario ok
 
 
-@app.route('/registro', methods=["GET","POST"])
+@app.route('/registro', methods=["POST"])
 def registro():  
-    global sesion_iniciada
-
-    if request.method == "GET":
-        return render ("login.html")
-    else:
-        sesion_iniciada = True
-        return render ("index.html")
+     return render ("registro.html")
 
 # como el usuario no pudo ingresar al sistema , en esta pantalla se sealizara 
 # el logeo y en la parte inferior del sistema se agrgara un espacio de comentario donde 
 # informara al administrador e tipo de rol que cumplira el usuario
-# el ususario registra sus datos y en un campo solicita al admin rol
+# el ususario registra sus datos y en un campo solicita al admin rol ok 
 
 
 @app.route('/reservas', methods=["GET","POST"])
@@ -78,7 +73,7 @@ def reserva():
 # dentro del sistema el usuario realizara la reserva del vuelo a realizar 
 # por medio de un codigo x , este sera clave para poder consultar su estado de vuelo
 # si no tiene codigo y datos del vuelo , no podra hacer la reserva , tendra un boton de 
-# regreso donde lo enviara a menu principal y escoger otra opcion.
+# regreso donde lo enviara a menu principal y escoger otra opcion. ok
 
 @app.route('/vuelos', methods=["GET"])
 def vuelos():
@@ -86,31 +81,38 @@ def vuelos():
 
 # esta pantalla solo estara diponible para los que tienen rol de admin y pilotos
 # si no es piloto no podra ingresar
-# tendra una lista de vuelos disponibles
+# tendra una lista de vuelos disponibles ok
 
+@app.route('/menu', methods=["GET","POST"])
+def menu():
+    global sesion_iniciada
 
-@app.route('/calificacion', methods=["GET","POST"])
-def calificacion():
-    return"pagina para ver la calififcaciones de los usuarios "
+    if request.method == "GET":
+        return render ("login.html")
+    else:
+        sesion_iniciada = True
+        return render ("menu.html")
+# este metodo permite tener de manera genral las opciones Lesser General Public
+# que tendran los usuarios del sistema para realizar las tareas
+# en la aplicacion` ok 
+
+@app.route('/calificacion/<id_calificacion>', methods=["GET"])
+def calificacion(id_calificacion):
+    try:
+        id_calificacion = int(id_calificacion)
+    except Exception as e:
+        id_calificacion = 0
+
+    if id_calificacion in lista_calificacion:
+        #return lista_calificacion[id_calificacion]
+        return render ("calificacion.html")
+    else:
+        return f"el comentario que esta buscando ({id_comentario}) no fue digitado"
+
 
 # en esta pantalla el usario podra asignar una calificacion al vuelo establecido , saldra el
 # nombre del vuelo , el comentario y el valor numerio de 1 a 100 dando calificacion al mismo
 # solo podra calificar si esta registrado.
-
-@app.route('/comentarios/<id_comentario>', methods=["GET"])
-def comentarios(id_comentario):
-    try:
-        id_comentario = int(id_comentario)
-    except Exception as e:
-        id_comentario = 0
-
-    if id_comentario in lista_comentarios:
-        return lista_comentarios[id_comentario]
-    else:
-        return f"el comentario que esta buscando ({id_comentario}) no fue digitado"
-
-# si el usuario esta logeado podra ver y editar comentarios de os vuelos , esto como
-# medida de retro alimentacion del servicio.
 # si el usuario no esta logeado solo podra ver los comentarios 
 
 
@@ -131,7 +133,7 @@ def salir():
     sesion_iniciada = False
     return render('index.html')
 
-# metodo de salida para cerrar cesion de cualquier pantalla
+# metodo de salida para cerrar cesion de cualquier pantalla ok
 
 
 
