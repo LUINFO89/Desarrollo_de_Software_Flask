@@ -157,6 +157,7 @@ body{
 h1 {
     text-align: center;
 }
+
   form {
     width: 600px;
     padding: 16px;
@@ -164,15 +165,26 @@ h1 {
     margin: auto;
     background-color: rgb(17, 14, 14);
   }
-  
+  form select{
+    padding: 3px 10px;
+    border: 1px solid #2bcf1c;
+    border-radius: 3px;
+    margin: 8px 10px;
+    display: inline-block;
+
+  }
   form input {
     padding: 3px 10px;
-    border: 1px solid #f6f6f6;
+    border: 1px solid #2bcf1c;
     border-radius: 3px;
     margin: 8px 10px;
     display: inline-block;
   }
-  
+  form label{
+    align-items: left;
+  }
+ 
+
   button {
     text-align: center;
     font-weight: bold;

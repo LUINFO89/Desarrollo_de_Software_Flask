@@ -8,8 +8,9 @@
          
             <h1>Welcome! Register</h1>
             <div class="form">
-                <form  name="formRegistro" onsubmit="validar_formulario()">
+                <form  name="formRegistro" onsubmit="" action="/inicio" method="POST">
                     <fieldset>
+                        {{ csrf_tokem }}
                         <label for="nombre">Nombre</label>
                         <input type="text" id="nombre" required> <br/> <br/>
                         <label for="correo">Correo</label>

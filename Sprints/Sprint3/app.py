@@ -44,7 +44,7 @@ def ingreso():
         return render ("login.html")
     else:
         sesion_iniciada = True
-        return render ("vuelos.html")
+        return render ("menu.html")
 
     # si el ususario se encuentra registrado ingresa al sistema principal 
     # cuando este dentro del sistema consultara los estados de los vuelos 
@@ -57,7 +57,13 @@ def ingreso():
 
 @app.route('/registro', methods=["GET","POST"])
 def registro():  
-    return render ("registro.html")
+    global sesion_iniciada
+
+    if request.method == "GET":
+        return render ("login.html")
+    else:
+        sesion_iniciada = True
+        return render ("index.html")
 
 # como el usuario no pudo ingresar al sistema , en esta pantalla se sealizara 
 # el logeo y en la parte inferior del sistema se agrgara un espacio de comentario donde 
@@ -67,7 +73,7 @@ def registro():
 
 @app.route('/reservas', methods=["GET","POST"])
 def reserva():
-    return"pagina de reserva"
+    return render ("reservas.html")
 
 # dentro del sistema el usuario realizara la reserva del vuelo a realizar 
 # por medio de un codigo x , este sera clave para poder consultar su estado de vuelo
@@ -76,7 +82,7 @@ def reserva():
 
 @app.route('/vuelos', methods=["GET"])
 def vuelos():
-    return"pagina para ver los vuelos "
+    return render ("vuelos.html")
 
 # esta pantalla solo estara diponible para los que tienen rol de admin y pilotos
 # si no es piloto no podra ingresar
@@ -123,7 +129,7 @@ def usuario_info(id_usuario):
 def salir():
     global sesion_iniciada
     sesion_iniciada = False
-    return redirect('/')
+    return render('index.html')
 
 # metodo de salida para cerrar cesion de cualquier pantalla
 
