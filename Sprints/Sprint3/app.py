@@ -75,7 +75,7 @@ def reserva():
 # si no tiene codigo y datos del vuelo , no podra hacer la reserva , tendra un boton de 
 # regreso donde lo enviara a menu principal y escoger otra opcion. ok
 
-@app.route('/vuelos', methods=["GET"])
+@app.route('/vuelos', methods=["GET","POST"])
 def vuelos():
     return render ("vuelos.html")
 
@@ -85,29 +85,21 @@ def vuelos():
 
 @app.route('/menu', methods=["GET","POST"])
 def menu():
-    global sesion_iniciada
-
-    if request.method == "GET":
-        return render ("login.html")
-    else:
-        sesion_iniciada = True
         return render ("menu.html")
 # este metodo permite tener de manera genral las opciones Lesser General Public
 # que tendran los usuarios del sistema para realizar las tareas
 # en la aplicacion` ok 
 
-@app.route('/calificacion/<id_calificacion>', methods=["GET"])
-def calificacion(id_calificacion):
-    try:
-        id_calificacion = int(id_calificacion)
-    except Exception as e:
-        id_calificacion = 0
-
-    if id_calificacion in lista_calificacion:
-        #return lista_calificacion[id_calificacion]
-        return render ("calificacion.html")
+@app.route('/calificacion/', methods=["GET"])
+def calificacion():
+    global sesion_iniciada
+    
+    if request.method == "POST":
+        return render ("login.html")
     else:
-        return f"el comentario que esta buscando ({id_comentario}) no fue digitado"
+        sesion_iniciada = True
+        return render ("calificacion.html")
+
 
 
 # en esta pantalla el usario podra asignar una calificacion al vuelo establecido , saldra el
@@ -119,7 +111,7 @@ def calificacion(id_calificacion):
 @app.route('/usuarios/<id_usuario>', methods=["GET","POST"])
 def usuario_info(id_usuario):
     if id_usuario in lista_usuarios:
-        return f"Estas viendo el perfil del usauario{id_usuario}"
+        return render ('usuarios.html')
     else:
         return f"Error el usuario {id_usuario} no existe"
 

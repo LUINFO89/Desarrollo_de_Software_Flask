@@ -46,6 +46,7 @@ img{
     width: 200px;
     height: 200px;
     align-items: center;
+    border-radius: 100px;
 }
 .general{
     width: 100%;
@@ -105,7 +106,9 @@ img{
 .izquierda{
     text-align: left;
 }
-
+.derecha{
+    text-align: right;
+}
 .miga{
     width: 300px;
     background-color:rgba(17, 14, 14, .42);
@@ -315,5 +318,14 @@ h1 {
     cursor: pointer;
 }
 
+  #miBoton:hover { 
+     
+    background: rgb(36, 102, 177); 
+    color: white; 
+  } 
+  #miBoton:active { 
+    background: gray; 
+    color: white; 
+  } 
 
 

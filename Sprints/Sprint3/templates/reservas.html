@@ -6,7 +6,7 @@
 
 
             <div class="form">
-                <form  name="formreservas" onsubmit="" action="/vuelos" method="POST" >
+                <form  name="formreservas" onsubmit="alert('Reserva registrada gracias por su compra')" action="/reservas" method="POST" >
                     <h1>RESERVA TU VUELO</h1>
                     <fieldset >
                         {{ csrf_tokem }}
@@ -45,6 +45,7 @@
                     </fieldset>
                     
                 </form>
+                <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
 
             </div>
         </div>   
