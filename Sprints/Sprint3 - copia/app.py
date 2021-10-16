@@ -8,19 +8,17 @@ from db import get_db
 import sqlite3
 
 from reservas import formularioI
-from vuelos import formularioV,formularioC
+from vuelos import formularioV
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-#----------------------------------------RUTA RAIZ--------------------------------------#
 
 @app.route('/', methods=["GET","POST"])
 def index():
     return render("index.html")
     
-#----------------------------------------INICIO LOGIN--------------------------------------#
 
 @app.route( '/login', methods=('GET', 'POST') )
 def login():
@@ -53,7 +51,7 @@ def login():
             else:
                 return redirect( 'menu.html' )
             flash( error )
-        return render( 'menu.html' )
+        return render( 'login.html' )
     except:
         return render( 'menu.html' )
             
@@ -66,7 +64,6 @@ def login():
     # si no esta loqeado se envia a menu principal donde tendra noticias generales del aeropuesto
     # si no esta logeado se solicitara crear un usuario ok
 
-#----------------------------------------RUTA REGISTRO--------------------------------------#
 
 @app.route('/registro', methods=["GET","POST"])
 def registro():  
@@ -84,11 +81,10 @@ def registro():
         return render ('login.html')
     return render ("registro.html")
 
-#----------------------------------------RUTA MENU --------------------------------------#
-
-@app.route('/menu', methods=["GET","POST"])
-def menu():
-        return render ("menu.html")
+# como el usuario no pudo ingresar al sistema , en esta pantalla se sealizara 
+# el logeo y en la parte inferior del sistema se agrgara un espacio de comentario donde 
+# informara al administrador e tipo de rol que cumplira el usuario
+# el ususario registra sus datos y en un campo solicita al admin rol ok 
 
 
 #----------------------------------------INICIO CRUD RESERVAS--------------------------------------#
@@ -140,7 +136,7 @@ def visualizar():
             row = cur.fetchone()
             if row is None:
                 return "No se encontró el registro en la base de datos...... :'( "
-            return render_template("vistaReserva.html", row = row)
+            return render_template("vistausuarios.html", row = row)
     return "Error"
 
 # dentro del sistema el usuario realizara la reserva del vuelo a realizar 
@@ -161,7 +157,7 @@ def eliminar():
             cur = conn.cursor()#manipula la db
             cur.execute("DELETE FROM reserva WHERE Documento = ?", [docum])
             if conn.total_changes > 0:
-                return "Reserva borrada ^v^"
+                return "Estudiante borrado ^v^"
             return render_template("reservas.html")
     return "Error"
 
@@ -202,12 +198,12 @@ def inicioV():
     form = formularioV()
     return render('vuelos.html', form = form)
 
-#----------------------------------------CREAR CRUD VUELOS ------------------------------------------------#
+#----------------------------------------INICIO CRUD VUELOS ------------------------------------------------#
 @app.route('/vuelos/guardar/', methods=["GET","POST"])
 def guardarv():
         form = formularioV()#Instancia de la clase en formulario.py
-        if request.method == "POST":#Recupera datos
-            docum = form.documento.data# docu es vuelos
+        if request.method == "POST":
+            docum = form.documento.data#Recupera datos
             aerolinea = form.aerolinea.data
             hora = form.hora.data
             destino = form.destino.data
@@ -228,103 +224,48 @@ def guardarv():
                 return "<h1>¡Datos de Vuelo guardados exitosamente!</h1>"
         return "No se pudo guardar T_T"    
 
-#----------------------------------------VISUALIZAR CRUD VUELOS --------------------------------------------#
-@app.route('/vuelos/visualizar/', methods=["POST"])
-def visualizarV():
-    form = formularioV()
-    if request.method == "POST":
-        docum = form.documento.data
-        with sqlite3.connect("database.db") as conn:#conexion
-            conn.row_factory = sqlite3.Row
-            cur = conn.cursor()#manipula la db
-            cur.execute("SELECT * FROM vuelos WHERE ID = ?", [docum])
-            row = cur.fetchone()
-            if row is None:
-                return "No se encontró el registro en la base de datos...... :'( "
-            return render_template("vistaVuelos.html", row = row)
-    return "Error"
-#----------------------------------------EDITAR CRUD VUELOS ------------------------------------------------#
-@app.route('/vuelo/actualizar/', methods=["POST"])
-def actualizarV():
-    
-    form = formularioV()#Instancia de la clase en formulario.py
-    if request.method == "POST":
-        docum = form.documento.data# docu es vuelos
-        aerolinea = form.aerolinea.data
-        hora = form.hora.data
-        destino = form.destino.data
-        horadestino = form.horadestino.data
-        observacion = form.observacion.data
-        piloto = form.piloto.data
-        capacidad = form.capacidad.data
-        with sqlite3.connect("database.db") as conn:#Manejador de contexto ->conexion
-            cur = conn.cursor()#manipula la db
-            #se va a usar el PreparedStatement
-            #Acciones
-            cur.execute(
-                "UPDATE vuelos SET AEROLINEA = ?, HORA = ?, DESTINO = ?, HORADESTINO = ?,OBSERVACION = ?,PILOTO = ?,CAPACIDAD = ? WHERE VUELO = ?;",
-             [docum, aerolinea, hora, destino, horadestino, observacion, piloto,capacidad]
-             )
-            conn.commit()#Confirmación de inserción de datos :)
-            return "¡Datos actualizados exitosamente ^v^!"
-    return "No se pudo actualizar T_T"
-#----------------------------------------BORRAR CRUD VUELOS ------------------------------------------------#
 
-@app.route('/vuelos/eliminar/', methods=["POST"])
-def eliminarV():
-   
-    form = formularioV()
-    if request.method == "POST":
-        docum = form.documento.data
-        with sqlite3.connect("database.db") as conn:
-            conn.row_factory = sqlite3.Row
-            cur = conn.cursor()#manipula la db
-            cur.execute("DELETE FROM vuelos WHERE VUELO = ?", [docum])
-            if conn.total_changes > 0:
-                return "Vuelo borrado ^v^"
-            return render_template("vuelos.html")
-    return "Error"
+# esta pantalla solo estara diponible para los que tienen rol de admin y pilotos
+# si no es piloto no podra ingresar
+# tendra una lista de vuelos disponibles ok
 
-
-#-----------------------------------------FIN CRUD VUELOS-------------------------------------------------#
-
-####################################################################################################################################
-######################################################################################################################
-##################################################################################################################
-
-
-#----------------------------------------INICIO CRUD COMENTARIOS ------------------------------------------------#
-@app.route('/comentarios', methods=["GET", "POST"])
-def inicioC():
-    form = formularioC()
-    return render('comentarios.html', form = form)
 
 #----------------------------------------CREAR CRUD VUELOS ------------------------------------------------#
-@app.route('/comentarios/guardar/', methods=["GET","POST"])
-def guardarC():
-        form = formularioC()#Instancia de la clase en formulario.py
-        if request.method == "POST":#Recupera datos
-            docum = form.documento.data# docu es vuelos
-            nombre = form.nombre.data
-            lugar = form.lugar.data
-            mensaje = form.mensaje.data
-            
 
-            with sqlite3.connect("database.db") as conn:#Manejador de contexto ->conexion
-                cur = conn.cursor()#manipula la db
-                #se va a usar el PreparedStatement
-                #Acciones
-                cur.execute(
-                    "INSERT INTO comentarios (ID, NOMBREVIAJERO, LUGARDEVUELO, MENSAJE) VALUES (?,?,?,?)", 
-                (docum, nombre, lugar, mensaje)
-                )
-                conn.commit()#Confirmación de inserción de datos :)
-                return "<h1>¡Comentario guardado exitosamente!</h1>"
-        return "No se pudo guardar T_T"    
+@app.route('/menu', methods=["GET","POST"])
+def menu():
+        return render ("menu.html")
+# este metodo permite tener de manera genral las opciones Lesser General Public
+# que tendran los usuarios del sistema para realizar las tareas
+# en la aplicacion` ok 
 
-#----------------------------------------EDITAR CRUD VUELOS ------------------------------------------------#
-#----------------------------------------VISUALIZAR CRUD VUELOS ------------------------------------------------#
-#----------------------------------------BORRAR CRUD VUELOS ------------------------------------------------#
+@app.route('/calificacion/', methods=["GET"])
+def calificacion():
+    global sesion_iniciada
+    
+    if request.method == "POST":
+        return render ("login.html")
+    else:
+        sesion_iniciada = True
+        return render ("calificacion.html")
+
+
+
+# en esta pantalla el usario podra asignar una calificacion al vuelo establecido , saldra el
+# nombre del vuelo , el comentario y el valor numerio de 1 a 100 dando calificacion al mismo
+# solo podra calificar si esta registrado.
+# si el usuario no esta logeado solo podra ver los comentarios 
+
+
+
+
+# esta es la pantalla de perfiles , en esta pagina el usuario estara en la capacidad de ver y editar comentarios
+# su usuario , siempre y cuando se encuentre logeado en el sistema podra editar datos generales
+# el administrado sera el unico con acceso a borrar y asignar roles
+
+
+   
+
 @app.route('/salir', methods=["POST"])
 def salir():
     global sesion_iniciada

@@ -5,165 +5,56 @@
 
     <div class="general">
     
-        <div class="subtitulo">
-            <br>
-            <h1 class = "izquierda">Vuelos</h1>
-            <br>
-            <p class ="miga">Dashboard / Vuelos</p>
-        </div>
-
-        <div class="sections border_blue">
-       
-            <div class="div_60 border_orange">
-                <div class="div_busqueda">
-                    <div class="items">
-                        <input type="text" placeholder="Buscar" class="input-form">
-                    </div>
-                    <div class="items">
-                        <input type="date"  class="input-form">
-                    </div>
-                    <div class="items">
-                        <button class="btn btn-form">
-                            Buscar
-                        </button>
-                    </div>
-                    <div>
-                        <div>
-                            <button class="btn btn-form">Agregar</button>
-                            <button class="btn btn-form">Editar</button>
-                            <button class="btn btn-form">Eliminar</button>
-                            <button class="btn btn-form">salir</button>
-                        </div>
+        <div class="form">
+            <h1>VUELO</h1>
+            <fieldset >
+            <form action="/vuelos/guardar/" id="IdFormularioV" method="POST">
+                {{ form.hidden_tag() }}<!--Evitar ataques de CRSF SIDE FORGUETTY-->
+                <div>
+                    {{ form.documento.label }}
+                    {{ form.documento() }}
                 </div>
-                <div class="div-table">
-                    <table>
-                        <thead>
-                            <th>Checked</th>
-                            <th>Code</th>
-                            <th>Origen</th>
-                            <th>Destino</th>
-                            <th>Avion</th>
-                            <th>Piloto</th>
-                            <th>Capacidad</th>
-                            <th>Estado</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" />
-                                </td>
-                                <td>0159</td>
-                                <td>Bogota</td>
-                                <td>Cartagena</td>
-                                <th>Boeing 747</th>
-                                <th>Fabian</th>
-                                <th>100 P</th>
-                                <th> <select name="" id=""> 
-                                    <option value=""> a tiempo </option> 
-                                    <option value=""> retrasado </option> 
-                                    <option value=""> aterrizando </option> 
-                                    <option value=""> despegando </option> 
-                                </select> </th>  
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" />
-                                </td>
-                                <td>0759</td>
-                                <td>Medellin</td>
-                                <td>Cartagena</td>
-                                <<th>Boeing 747</th>
-                                <th>Fabian</th>
-                                <th>100 P</th>
-                                <th> <select name="" id=""> 
-                                    <option value=""> a tiempo </option> 
-                                    <option value=""> retrasado </option> 
-                                    <option value=""> aterrizando </option> 
-                                    <option value=""> despegando </option> 
-                                </select> </th>  
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" />
-                                </td>
-                                <td>0159</td>
-                                <td>Bogota</td>
-                                <td>Cartagena</td>
-                                <th>Boeing 747</th>
-                                <th>Fabian</th>
-                                <th>100 P</th>
-                                <th> <select name="" id=""> 
-                                    <option value=""> a tiempo </option> 
-                                    <option value=""> retrasado </option> 
-                                    <option value=""> aterrizando </option> 
-                                    <option value=""> despegando </option> 
-                                </select> </th>  
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" />
-                                </td>
-                                <td>0759</td>
-                                <td>Medellin</td>
-                                <td>Cartagena</td>
-                                <th>Boeing 747</th>
-                                <th>Fabian</th>
-                                <th>100 P</th>
-                                <th> <select name="" id=""> 
-                                    <option value=""> a tiempo </option> 
-                                    <option value=""> retrasado </option> 
-                                    <option value=""> aterrizando </option> 
-                                    <option value=""> despegando </option> 
-                                </select> </th>  
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" />
-                                </td>
-                                <td>0159</td>
-                                <td>Bogota</td>
-                                <td>Cartagena</td>
-                                <th>Boeing 747</th>
-                                <th>Fabian</th>
-                                <th>100 P</th>
-                                <th> <select name="" id=""> 
-                                    <option value=""> a tiempo </option> 
-                                    <option value=""> retrasado </option> 
-                                    <option value=""> aterrizando </option> 
-                                    <option value=""> despegando </option> 
-                                </select> </th>  
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" />
-                                </td>
-                                <td>0759</td>
-                                <td>Medellin</td>
-                                <td>Cartagena</td>
-                                <th>Boeing 747</th>
-                                <th>Fabian</th>
-                                <th>100 P</th>
-                                <th> <select name="" id=""> 
-                                    <option value=""> a tiempo </option> 
-                                    <option value=""> retrasado </option> 
-                                    <option value=""> aterrizando </option> 
-                                    <option value=""> despegando </option> 
-                                </select> </th>  
-                            </tr>
-   
-                       
-                       
-         
+                <div>
+                    {{ form.aerolinea.label }}
+                    {{ form.aerolinea() }}
+                </div>
+                <div>
+                    {{ form.hora.label }}
+                    {{ form.hora() }}
+                </div>
+                <div>
+                    {{ form.destino.label }}
+                    {{ form.destino() }}
+                </div>
+                <div>
+                    {{ form.horadestino.label }}
+                    {{ form.horadestino() }}
+                </div>
+                <div>
+                    {{ form.observacion.label }}
+                    {{ form.observacion() }}
+                </div>
+                <div>
+                    {{ form.piloto.label }}
+                    {{ form.piloto() }}
+                </div>
+                <div>
+                    {{ form.capacidad.label }}
+                    {{ form.capacidad() }}
+                </div>
+                <div>
+                    {{form.botonEliminar()}}
+                    {{form.botonActualizar()}}
+                    {{form.botonCrear()}}
+                    {{form.botonVisualizar()}}
+                </div>
+            </form>
+            </fieldset>
             
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-    
-        </div>
-        <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal.</a></li>  
+        </form>
+        <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
 
-        
+    </div>
 
     </div>
 

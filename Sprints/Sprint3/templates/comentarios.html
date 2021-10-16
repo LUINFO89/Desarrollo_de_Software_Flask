@@ -6,9 +6,9 @@
 
 
             <div class="form">
-                    <h1>RESERVA TU VUELO</h1>
+                    <h1>SUGERENCIAS Y COMENTARIOS </h1>
                     <fieldset >
-                    <form action="/reservas/guardar/" id="IdFormulario" method="POST">
+                    <form action="/comentarios/guardar/" id="IdFormularioC" method="POST">
                         {{ form.hidden_tag() }}<!--Evitar ataques de CRSF SIDE FORGUETTY-->
                         <div>
                             {{ form.documento.label }}
@@ -19,25 +19,14 @@
                             {{ form.nombre() }}
                         </div>
                         <div>
-                            {{ form.lugardesde.label }}
-                            {{ form.lugardesde() }}
+                            {{ form.lugar.label }}
+                            {{ form.lugar() }}
                         </div>
                         <div>
-                            {{ form.hasta.label }}
-                            {{ form.hasta() }}
+                            {{ form.mensaje.label }}
+                            {{ form.mensaje() }}
                         </div>
-                        <div>
-                            {{ form.salida.label }}
-                            {{ form.salida() }}
-                        </div>
-                        <div>
-                            {{ form.regreso.label }}
-                            {{ form.regreso() }}
-                        </div>
-                        <div>
-                            {{ form.cantidadpasajeros.label }}
-                            {{ form.cantidadpasajeros() }}
-                        </div>
+                        
                         <div>
                             {{form.botonEliminar()}}
                             {{form.botonActualizar()}}
