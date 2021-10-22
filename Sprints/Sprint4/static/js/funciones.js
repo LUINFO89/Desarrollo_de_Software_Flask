@@ -36,6 +36,7 @@ function eliminarC(){
 function actualizarC(){
     document.getElementById("IdFormularioC").action="/comentarios/actualizar/";
 }
+<<<<<<< HEAD
 //FUNCIONES USUARIOS
 function guardarU(){
     document.getElementById("IdFormularioU").action="/user/guardar/";
@@ -50,3 +51,8 @@ function actualizarU(){
     document.getElementById("IdFormularioU").action="/user/actualizar/";
 }
 
+=======
+function iniciarSesion(){
+    document.getElementById("formularioA").action="/login";
+}
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39

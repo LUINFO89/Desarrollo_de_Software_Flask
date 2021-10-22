@@ -1,6 +1,10 @@
 
 from flask_wtf import FlaskForm
+<<<<<<< HEAD
 from wtforms import StringField, SelectField, SubmitField,TextField,TextAreaField
+=======
+from wtforms import StringField, SelectField, SubmitField,TextField
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
 from wtforms.validators import DataRequired
 
 class formularioV(FlaskForm):
@@ -20,14 +24,22 @@ class formularioV(FlaskForm):
     botonVisualizar = SubmitField("Ver Vuelos ", render_kw={"onmouseover": "visualizarV()"})
 
 class formularioC(FlaskForm):
+<<<<<<< HEAD
     documento = StringField("Numero de Identificacion:", validators=[DataRequired(message="No dejar vacío este campo...")])
     nombre = StringField("Nombre pasajero:")
     lugar = SelectField("Lugar de Destino:", choices=[("Barranquilla"), ("Bogota"), ("Medellin"), ("Cali"), ("Cartagena")])
     mensaje = TextAreaField("Mensaje , sujerencia o reconocimiento:")
+=======
+    documento = StringField("Identificacion:", validators=[DataRequired(message="No dejar vacío este campo...")])
+    nombre = StringField("Nombre:")
+    lugar = SelectField("Lugar de Destino:", choices=[("Barranquilla"), ("Bogota"), ("Medellin"), ("Cali"), ("Cartagena")])
+    mensaje = TextField("Mensaje , sujerencia o reconocimiento:")
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
     
     botonCrear = SubmitField("botonCrear", render_kw={"onmouseover": "guardarC()"})
     botonEliminar = SubmitField("botonEliminar", render_kw={"onmouseover": "eliminarC()"})
     botonActualizar = SubmitField("botonActualizar", render_kw={"onmouseover": "actualizarC()"})
+<<<<<<< HEAD
     botonVisualizar = SubmitField("Ver comentarios ", render_kw={"onmouseover": "visualizarC()"})
 
 class formularioU(FlaskForm):
@@ -46,6 +58,9 @@ class formularioU(FlaskForm):
     botonActualizar = SubmitField("botonActualizar", render_kw={"onmouseover": "actualizarU()"})
     botonVisualizar = SubmitField("Ver Usuario ", render_kw={"onmouseover": "visualizarU()"})
 
+=======
+    botonVisualizar = SubmitField("Ver Vuelos ", render_kw={"onmouseover": "visualizarC()"})
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
 
 
 

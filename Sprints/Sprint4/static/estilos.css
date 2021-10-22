@@ -281,7 +281,11 @@ h1 {
 }
 
   form {
+<<<<<<< HEAD
     
+=======
+    width: 500px;
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
     padding: 16px;
     border-radius: 10px;
     margin: auto;
@@ -305,7 +309,13 @@ h1 {
   form label{
     align-items: left;
   }
+<<<<<<< HEAD
  
+=======
+  form div{
+    align-items: left;
+  }
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
 
   button {
     text-align: center;

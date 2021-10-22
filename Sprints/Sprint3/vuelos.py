@@ -30,3 +30,6 @@ class formularioC(FlaskForm):
     botonEliminar = SubmitField("botonEliminar", render_kw={"onmouseover": "eliminarC()"})
     botonActualizar = SubmitField("botonActualizar", render_kw={"onmouseover": "actualizarC()"})
     botonVisualizar = SubmitField("Ver Vuelos ", render_kw={"onmouseover": "visualizarC()"})
+
+
+
