@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+
+{% block contenido%}
+    <div class="general">
+     
+    <section class="formularioRegistro">
+         
+            <h1>Welcome! Login </h1>
+            <div class="form">
+                <form name="loginForm" method="post" action="{{ url_for('login') }}"id="formularioA">
+                        <fieldset >
+                            <div>
+                                <label for="username2">Usuario</label>
+                                <input name="username" id="username" />
+                            </div>
+                            <div>
+                                <label for="password2">Contraseña</label>
+                                <input type="password" name="password" id="password" />
+                            </div>
+                            <input type="submit" value="Iniciar Sesion" onmouseover="iniciarSesion()">
+
+                    </fieldset>
+                </form>
+                <form action="registro" method="POST">
+                    <button type="submit" >Register</button><br><br>
+                    <a href="" >Recordar contraseña</a>
+                </form>
+
+            </div>
+            </section>
+    </div>
+ 
+    {% endblock %}
