@@ -23,4 +23,17 @@ function eliminarV(){
 function actualizarV(){
     document.getElementById("IdFormularioV").action="/vuelos/actualizar/";
 }
+//FUNCIONES COMENTARIOS
+function guardarV(){
+    document.getElementById("IdFormularioC").action="/comentarios/guardar/";
+}
+function visualizarV(){
+    document.getElementById("IdFormularioC").action="/comentarios/visualizar/";
+}
+function eliminarV(){
+    document.getElementById("IdFormularioC").action="/comentarios/eliminar/";
+}
+function actualizarV(){
+    document.getElementById("IdFormularioC").action="/comentarios/actualizar/";
+}
 

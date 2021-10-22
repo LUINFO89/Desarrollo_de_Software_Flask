@@ -291,7 +291,20 @@ def eliminarV():
 ####################################################################################################################################
 ######################################################################################################################
 ##################################################################################################################
-
+@app.route('/comentarios/visualizar/', methods=["POST"])
+def visualizarC():
+    form = formularioV()
+    if request.method == "POST":
+        docum = form.documento.data
+        with sqlite3.connect("database.db") as conn:#conexion
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()#manipula la db
+            cur.execute("SELECT * FROM comentarios WHERE ID = ?", [docum])
+            row = cur.fetchone()
+            if row is None:
+                return "No se encontró el registro en la base de datos...... :'( "
+            return render_template("vistacomentarios.html", row = row)
+    return "Error"
 
 #----------------------------------------INICIO CRUD COMENTARIOS ------------------------------------------------#
 @app.route('/comentarios', methods=["GET", "POST"])
@@ -299,7 +312,7 @@ def inicioC():
     form = formularioC()
     return render('comentarios.html', form = form)
 
-#----------------------------------------CREAR CRUD VUELOS ------------------------------------------------#
+#----------------------------------------CREAR CRUD COMENTARIOS ------------------------------------------------#
 @app.route('/comentarios/guardar/', methods=["GET","POST"])
 def guardarC():
         form = formularioC()#Instancia de la clase en formulario.py
@@ -322,9 +335,47 @@ def guardarC():
                 return "<h1>¡Comentario guardado exitosamente!</h1>"
         return "No se pudo guardar T_T"    
 
-#----------------------------------------EDITAR CRUD VUELOS ------------------------------------------------#
-#----------------------------------------VISUALIZAR CRUD VUELOS ------------------------------------------------#
-#----------------------------------------BORRAR CRUD VUELOS ------------------------------------------------#
+#----------------------------------------EDITAR CRUD COMENTARIOS ------------------------------------------------#
+@app.route('/comentarios/actualizar/', methods=["POST"])
+def actualizarC():
+    
+    form = formularioC()#Instancia de la clase en formulario.py
+    if request.method == "POST":
+            docum = form.documento.data# docu es vuelos
+            nombre = form.nombre.data
+            lugar = form.lugar.data
+            mensaje = form.mensaje.data
+
+            with sqlite3.connect("database.db") as conn:#Manejador de contexto ->conexion
+                cur = conn.cursor()#manipula la db
+                #se va a usar el PreparedStatement
+                #Acciones
+                cur.execute(
+                    "UPDATE comentarios SET ID NOMBREVIAJERO = ?, LUGARDEVUELO = ?, MENSAJE = ? WHERE ID = ?;",
+                [docum, nombre, lugar, mensaje ]
+                )
+                conn.commit()#Confirmación de inserción de datos :)
+                return "¡Datos actualizados exitosamente ^v^!"
+    return "No se pudo actualizar T_T"
+#----------------------------------------VISUALIZAR CRUD COMENTARIO ---------------------------------------------#
+#----------------------------------------BORRAR CRUD COMENTARIOS ------------------------------------------------#
+@app.route('/comentarios/eliminar/', methods=["POST"])
+def eliminarC():
+   
+    form = formularioV()
+    if request.method == "POST":
+        docum = form.documento.data
+        with sqlite3.connect("database.db") as conn:
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()#manipula la db
+            cur.execute("DELETE FROM comentarios WHERE ID = ?", [docum])
+            if conn.total_changes > 0:
+                return "Comentario  borrado ^v^"
+            return render_template("comentarios.html")
+    return "Error"
+
+
+
 @app.route('/salir', methods=["POST"])
 def salir():
     global sesion_iniciada
