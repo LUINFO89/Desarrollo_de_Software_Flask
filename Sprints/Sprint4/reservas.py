@@ -28,4 +28,4 @@ class formularioI(FlaskForm):
     botonCrear = SubmitField("botonCrear", render_kw={"onmouseover": "guardar()"})
     botonEliminar = SubmitField("botonEliminar", render_kw={"onmouseover": "eliminar()"})
     botonActualizar = SubmitField("botonActualizar", render_kw={"onmouseover": "actualizar()"})
-    botonVisualizar = SubmitField("botonVisualizar", render_kw={"onmouseover": "visualizar()"})
+    botonVisualizar = SubmitField("Visualizar Reservas", render_kw={"onmouseover": "visualizar()"})

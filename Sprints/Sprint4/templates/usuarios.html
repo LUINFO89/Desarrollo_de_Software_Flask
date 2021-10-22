@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+
+{% block contenido%}
+<div class="general">
+
+    <section class="formularioUsuarios">
+         
+            <h1>USUARIOS</h1>
+            <div class="form">
+                
+                    <form action="/usuarios/guardar/" id="IdFormularioU" method="POST">
+                        {{ form.hidden_tag() }}<!--Evitar ataques de CRSF SIDE FORGUETTY-->
+                        <div>
+                            {{ form.documento.label }}
+                            {{ form.documento() }}
+                            {{ form.nombre.label }}
+                            {{ form.nombre() }}
+                        </div>
+                        <div>
+                            {{ form.usuario.label }}
+                            {{ form.usuario() }}
+                            {{ form.contraseña.label }}
+                            {{ form.contraseña() }}
+                        </div>
+                        <div>
+                            {{ form.correo.label }}
+                            {{ form.correo() }}
+                            {{ form.nacimiento.label }}
+                            {{ form.nacimiento() }}
+                        </div>
+                        <div>
+                            {{ form.telefono.label }}
+                            {{ form.telefono() }}
+                            {{ form.direccion.label }}
+                            {{ form.direccion() }}
+                        </div>
+                        <div>
+                            {{ form.rol.label }}
+                            {{ form.rol() }}
+                            
+                        </div>
+                        
+
+                        
+                        <div>
+                            {{form.botonActualizar()}}
+                            {{form.botonVisualizar()}}
+                        </div>
+                    </form>
+                <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
+            </div>
+    </section>
+</div>
+
+{% endblock %}

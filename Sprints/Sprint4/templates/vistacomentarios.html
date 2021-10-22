@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{% block contenido%}
+        <div class="general">
+
+                <table border="1">
+                    <tr>
+                        <td>
+                            IDENTIFICACION
+                        </td>
+                        <td>
+                            NOMBRE VIAJERO
+                        </td>
+                        <td>
+                            LUGAR DE VUELO                        </td>
+                        <td>
+                            MENSAJE
+                        </td>
+    
+                    </tr>
+                    {% if row %}
+                    <tr>
+                        <td>
+                            {{ row["idcomentarios"] }}
+                        </td>
+                        <td>
+                            {{ row["NOMBREVIAJERO"] }}
+                        </td>
+                        <td>
+                            {{ row["LUGARDEVUELO"] }}
+                        </td>
+                        <td>
+                            {{ row["MENSAJE"] }}
+                        </td>
+                        
+                       
+                    
+                    </tr>
+                    {% endif %}
+                </table>
+                <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
+
+
+        </div>   
+
+    {% endblock %}
