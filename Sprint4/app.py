@@ -2,9 +2,11 @@ import os
 import re
 from sqlite3.dbapi2 import Date, Row
 from flask import *
+from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask,redirect,request,flash,url_for,jsonify,session
 from flask import render_template as render
 from db import get_db
+import functools
 import sqlite3
 
 from reservas import formularioI
@@ -14,50 +16,14 @@ from vuelos import formularioV,formularioC,formularioU
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+
 #----------------------------------------RUTA RAIZ--------------------------------------#
 
 @app.route('/', methods=["GET","POST"])
+
 def index():
     return render("index.html")
     
-#----------------------------------------INICIO LOGIN--------------------------------------#
-
-@app.route( '/login', methods=('GET', 'POST') )
-def login():
-    try:
-        if request.method == 'POST':
-            db = get_db()
-            error = None
-            username = request.form['username']
-            password = request.form['password']
-
-            if not username:
-                error = 'Debes ingresar el usuario'
-                flash( error )
-                return render( 'login.html' )
-
-            if not password:
-                error = 'Contraseña requerida'
-                flash( error )
-                return render( 'login.html' )
-
-            user = db.execute(
-                'SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ? ', (username, password)
-            ).fetchone()
-
-            # print('USER ')
-            # print(user)
-
-            if user is None:
-                error = 'Usuario o contraseña inválidos'
-            else:
-                return redirect( 'menu.html' )
-            flash( error )
-        return render( 'menu.html' )
-    except:
-        return render( 'menu.html' )
-
-#----------------------------------------RUTA REGISTRO--------------------------------------#
 
 @app.route('/registro', methods=["GET","POST"])
 def registro():  
@@ -69,12 +35,54 @@ def registro():
         error = None
         db = get_db()
         db.executescript(
-            "INSERT INTO usuarios   (nombre, usuario,correo,contraseña) VALUES ('%s','%s','%s','%s')"%(name,username,email,password)
+            "INSERT INTO usuarios   (nombre, usuario,correo,contraseña) VALUES ('%s','%s','%s','%s')"%(name,username,email,generate_password_hash(password))
         )
         db.commit()
-        return render ('login.html')
-    return render ("registro.html")
+        return "usuario guardado exitosamente"
+    return  render ('registro.html') 
+#----------------------------------------RUTA REGISTRO--------------------------------------#
 
+    
+#----------------------------------------INICIO LOGIN--------------------------------------#
+      
+@app.route('/login', methods=('GET', 'POST'))
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
+        user = db.execute(
+            'SELECT * FROM usuarios WHERE usuario = ?', (username,)
+        ).fetchone()
+
+        if user is None:
+            error = 'Incorrect username.'
+        elif not check_password_hash(user['contraseña'], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('menu'))
+
+        flash(error)
+
+    return render_template('login.html')
+
+
+
+
+#------------------------------
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
 #----------------------------------------RUTA MENU --------------------------------------#
 
 @app.route('/menu', methods=["GET","POST"])
@@ -84,6 +92,7 @@ def menu():
 #----------------------------------------INICIO CRUD RESERVAS--------------------------------------#
 
 @app.route('/reservas', methods=["GET", "POST"])
+@login_required
 def inicio():
     form = formularioI()
     return render_template('reservas.html', form = form)
@@ -175,12 +184,9 @@ def actualizar():
     return "No se pudo actualizar T_T"
 #-----------------------------------------FIN CRUD RESERVAS-------------------------------------------------#
 
-####################################################################################################################################
-######################################################################################################################
-##################################################################################################################
-
 #----------------------------------------INICIO CRUD VUELOS ------------------------------------------------#
 @app.route('/vuelos', methods=["GET", "POST"])
+@login_required
 def inicioV():
     form = formularioV()
     return render('vuelos.html', form = form)
@@ -289,6 +295,7 @@ def visualizarC():
 
 #----------------------------------------INICIO CRUD COMENTARIOS ------------------------------------------------#
 @app.route('/comentarios', methods=["GET", "POST"])
+@login_required
 def inicioC():
     form = formularioC()
     return render('comentarios.html', form = form)
@@ -337,7 +344,6 @@ def actualizarC():
             return "¡Datos actualizados exitosamente ^v^!"
     return "No se pudo actualizar T_T"
 #----------------------------------------VISUALIZAR CRUD COMENTARIO ---------------------------------------------#
-#----------------------------------------BORRAR CRUD COMENTARIOS ------------------------------------------------#
 @app.route('/comentarios/eliminar/', methods=["POST"])
 def eliminarC():
    
@@ -352,12 +358,16 @@ def eliminarC():
                 return "Comentario  borrado ^v^"
             return render_template("comentarios.html")
     return "Error"
+#----------------------------------------BORRAR CRUD COMENTARIOS ------------------------------------------------#
 
+#----------------------------------------CREAR USUSARIO  ---------------------------------------------#
 
 @app.route('/user', methods=["GET", "POST"])
+@login_required
 def inicioU():
     form = formularioU()
     return render('usuarios.html', form = form)
+#----------------------------------------EDITAR USUSARIO  ---------------------------------------------#
 
 @app.route('/usuarios/guardar/', methods=["GET","POST"])
 def guardarU():
@@ -365,25 +375,41 @@ def guardarU():
         if request.method == "POST":#Recupera datos
             docum = form.documento.data# docu es vuelos
             nombre = form.nombre.data
-            
+            usuario = form.usuario.data
+            contraseña = form.contraseña.data
+            correo = form.correo.data
+            nacimiento = form.nacimiento.data
+            telefono = form.telefono.data
+            direccion = form.direccion.data
+            rol = form.rol.data
 
-            with sqlite3.connect("database.db") as conn:#Manejador de contexto ->conexion
-                cur = conn.cursor()#manipula la db
-                #se va a usar el PreparedStatement
-                #Acciones
+            with sqlite3.connect("database.db") as conn:
+                cur = conn.cursor()
                 cur.execute(
-                    "INSERT INTO comentarios (idcomentarios, NOMBREVIAJERO, LUGARDEVUELO, MENSAJE) VALUES (?,?,?,?)", 
-                (docum, nombre,)
+                    "INSERT INTO comentarios (id, nombre, usuario, contraseña,correo,nacimiento,telefono,direccion,rol) VALUES (?,?,?,?,?,?,?,?,?)", 
+                (docum, nombre,usuario,contraseña,correo,nacimiento,telefono,direccion,rol)
                 )
-                conn.commit()#Confirmación de inserción de datos :)
+                conn.commit()
                 return "<h1>¡Comentario guardado exitosamente!</h1>"
         return "No se pudo guardar T_T"   
 
+#----------------------------------------VER USUSARIO  ---------------------------------------------#
+#------------------------------
+'''@app.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = get_db().execute(
+            'SELECT * FROM usuarios WHERE id = ?', (user_id,)
+        ).fetchone()'''
 
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 # metodo de salida para cerrar cesion de cualquier pantalla ok
 

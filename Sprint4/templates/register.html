@@ -4,7 +4,13 @@
   <h1>{% block title %}Register{% endblock %}</h1>
 {% endblock %}
 
-{% block content %}
+{% block contenido %}
+<div class="general">
+
+  <section class="formularioRegistro">
+       
+          <h1>Welcome! Register</h1>
+          <div class="form">
   <form method="post">
     <label for="username">Username</label>
     <input name="username" id="username" required>
@@ -12,4 +18,6 @@
     <input type="password" name="password" id="password" required>
     <input type="submit" value="Register">
   </form>
+
+
 {% endblock %}
