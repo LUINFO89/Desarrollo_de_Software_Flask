@@ -32,4 +32,18 @@ class formularioC(FlaskForm):
     botonVisualizar = SubmitField("Ver Vuelos ", render_kw={"onmouseover": "visualizarC()"})
 
 
+class formularioU(FlaskForm):
+    documento = StringField("Identificacion:", validators=[DataRequired(message="No dejar vacío este campo...")])
+    nombre = StringField("Nombre:")
+    usuario = StringField("usuario:")
+    correo = StringField("usuario:")
+    contraseña = StringField("contraseña:")
+    nacimiento = SelectField("Lugar de Nacimiento:", choices=[("Barranquilla"), ("Bogota"), ("Medellin"), ("Cali"), ("Cartagena")])
+    telefono = TextField("Telefono:")
+    direccion = TextField("Direccion:")
+    rol = SelectField("rol:", choices=[("Pasajero"), ("Piloto")])
 
+    botonCrear = SubmitField("botonCrear", render_kw={"onmouseover": "guardarU()"})
+    botonEliminar = SubmitField("botonEliminar", render_kw={"onmouseover": "eliminarU()"})
+    botonActualizar = SubmitField("botonActualizar", render_kw={"onmouseover": "actualizarU()"})
+    botonVisualizar = SubmitField("Ver Usuario ", render_kw={"onmouseover": "visualizarU()"})

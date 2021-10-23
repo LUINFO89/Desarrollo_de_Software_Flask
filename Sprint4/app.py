@@ -380,13 +380,10 @@ def guardarU():
         return "No se pudo guardar T_T"   
 
 
-
-
-@app.route('/salir', methods=["POST"])
-def salir():
-    global sesion_iniciada
-    sesion_iniciada = False
-    return render('index.html')
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 # metodo de salida para cerrar cesion de cualquier pantalla ok
 
