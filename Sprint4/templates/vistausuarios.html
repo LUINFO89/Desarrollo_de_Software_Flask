@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+
+{% block contenido%}
+        <div class="general">
+                <table border="1">
+                    <tr>
+                        <td>
+                            IDENTIFICACION
+                        </td>
+                        <td>
+                            NOMBRE USUARIO
+                        </td>
+                        <td>
+                            USUARIO                        
+                        </td>
+                        <td>
+                            CORREO
+                        </td>
+                        
+                        <td>
+                            FECHA NACIMIENTO
+                        </td>
+                        <td>
+                            TELEFONO
+                        </td>
+                        <td>
+                            DIRECCION
+                        </td>
+                        <td>
+                            ROL
+                        </td>
+                    
+                    </tr>
+                    {% if row %}
+                    <tr>
+                        <td>
+                            {{ row["id"] }}
+                        </td>
+                        <td>
+                            {{ row["nombre"] }}
+                        </td>
+                        <td>
+                            {{ row["usuario"] }}
+                        </td>
+                        <td>
+                            {{ row["correo"] }}
+                        </td>
+                        
+                        <td>
+                            {{ row["nacimiento"] }}
+                        </td>
+                        <td>
+                            {{ row["telefono"] }}
+                        </td>
+                        <td>
+                            {{ row["direccion"] }}
+                        </td><td>
+                            {{ row["rol"] }}
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+                <h1>VISTA DE USUSARIOS</h1>
+
+                <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
+
+
+        </div>   
+
+    {% endblock %}

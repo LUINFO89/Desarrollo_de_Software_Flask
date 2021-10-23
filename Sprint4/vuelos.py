@@ -1,6 +1,6 @@
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField,TextField,TextAreaField
+from wtforms import StringField, SelectField, SubmitField,TextField,TextAreaField,PasswordField
 from wtforms.validators import DataRequired
 
 class formularioV(FlaskForm):
@@ -37,13 +37,14 @@ class formularioU(FlaskForm):
     nombre = StringField("Nombre:")
     usuario = StringField("usuario:")
     correo = StringField("usuario:")
-    contraseña = StringField("contraseña:")
+    contraseña = PasswordField("contraseña:")
     nacimiento = SelectField("Lugar de Nacimiento:", choices=[("Barranquilla"), ("Bogota"), ("Medellin"), ("Cali"), ("Cartagena")])
     telefono = TextField("Telefono:")
     direccion = TextField("Direccion:")
     rol = SelectField("rol:", choices=[("Pasajero"), ("Piloto")])
 
-    botonCrear = SubmitField("botonCrear", render_kw={"onmouseover": "guardarU()"})
-    botonEliminar = SubmitField("botonEliminar", render_kw={"onmouseover": "eliminarU()"})
-    botonActualizar = SubmitField("botonActualizar", render_kw={"onmouseover": "actualizarU()"})
+    botonCrear = SubmitField("Crear usuario", render_kw={"onmouseover": "guardarU()"})
+    botonEliminar = SubmitField("Eliminar Usuario", render_kw={"onmouseover": "eliminarU()"})
+    botonActualizar = SubmitField("Actualizar usuario ", render_kw={"onmouseover": "actualizarU()"})
     botonVisualizar = SubmitField("Ver Usuario ", render_kw={"onmouseover": "visualizarU()"})
+

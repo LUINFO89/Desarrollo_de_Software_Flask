@@ -4,6 +4,7 @@ from sqlite3.dbapi2 import Date, Row
 from flask import *
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask,redirect,request,flash,url_for,jsonify,session
+from flask import Flask, render_template, flash, request, redirect, url_for, session, send_file, current_app, g, make_response
 from flask import render_template as render
 from db import get_db
 import functools
@@ -20,58 +21,83 @@ app.secret_key = os.urandom(24)
 #----------------------------------------RUTA RAIZ--------------------------------------#
 
 @app.route('/', methods=["GET","POST"])
-
 def index():
+    
     return render("index.html")
     
 
 @app.route('/registro', methods=["GET","POST"])
-def registro():  
-    if request.method == 'POST':
-        name = request.form['nombre']
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['correo']
-        error = None
-        db = get_db()
-        db.executescript(
-            "INSERT INTO usuarios   (nombre, usuario,correo,contraseña) VALUES ('%s','%s','%s','%s')"%(name,username,email,generate_password_hash(password))
-        )
-        db.commit()
-        return "usuario guardado exitosamente"
-    return  render ('registro.html') 
+def registro(): 
+    
+        if request.method == 'POST':
+            name = request.form['nombre']
+            username = request.form['username']
+            password = request.form['password']
+            email = request.form['correo']
+            error = None
+            db = get_db()
+            db.executescript(
+                "INSERT INTO usuarios   (nombre, usuario,correo,contraseña) VALUES ('%s','%s','%s','%s')"%(name,username,email,generate_password_hash(password))
+            )
+            db.commit()
+            return "usuario guardado exitosamente"
+        return  render ('registro.html') 
+    
 #----------------------------------------RUTA REGISTRO--------------------------------------#
 
-    
 #----------------------------------------INICIO LOGIN--------------------------------------#
-      
-@app.route('/login', methods=('GET', 'POST'))
+
+
+@app.route( '/login', methods=('GET', 'POST') )
 def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        db = get_db()
-        error = None
-        user = db.execute(
-            'SELECT * FROM usuarios WHERE usuario = ?', (username,)
-        ).fetchone()
 
-        if user is None:
-            error = 'Incorrect username.'
-        elif not check_password_hash(user['contraseña'], password):
-            error = 'Incorrect password.'
+        if request.method == 'POST':
+            db = get_db()
+            error = None
+            username = request.form['username']
+            password = request.form['password']
 
-        if error is None:
-            session.clear()
-            session['user_id'] = user['id']
-            return redirect(url_for('menu'))
+            if not username:
+                error = 'Debes ingresar el usuario'
+                flash( error )
+                return render_template( 'login.html' )
 
-        flash(error)
+            if not password:
+                error = 'Contraseña requerida'
+                flash( error )
+                return render_template( 'login.html' )
+    
+            user = db.execute(
+                'SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ?', (username, password)
+            ).fetchone()
 
-    return render_template('login.html')
-
-
-
+            if user is None:
+                user = db.execute(
+                    'SELECT * FROM usuarios WHERE usuario = ?', (username,)
+                ).fetchone()
+                if user is None:
+                    error = 'Usuario no existe'
+                else:
+                    #Validar contraseña hash            
+                    store_password = user[4]
+                    result = check_password_hash(store_password, password)
+                    if result is False:
+                        error = 'Contraseña inválida'
+                    else:
+                        session.clear()
+                        session['user_id'] = user[0]
+                        resp = make_response( redirect( url_for( 'menu' ) ) )
+                        resp.set_cookie( 'username', username )
+                        return resp
+                    flash( error )
+            else:
+                session.clear()
+                session['user_id'] = user['id']
+                return redirect( url_for( 'menu' ) )
+            flash( error )
+            
+        return render_template( 'login.html' )
+   
 
 #------------------------------
 def login_required(view):
@@ -92,7 +118,6 @@ def menu():
 #----------------------------------------INICIO CRUD RESERVAS--------------------------------------#
 
 @app.route('/reservas', methods=["GET", "POST"])
-@login_required
 def inicio():
     form = formularioI()
     return render_template('reservas.html', form = form)
@@ -186,7 +211,7 @@ def actualizar():
 
 #----------------------------------------INICIO CRUD VUELOS ------------------------------------------------#
 @app.route('/vuelos', methods=["GET", "POST"])
-@login_required
+
 def inicioV():
     form = formularioV()
     return render('vuelos.html', form = form)
@@ -295,7 +320,6 @@ def visualizarC():
 
 #----------------------------------------INICIO CRUD COMENTARIOS ------------------------------------------------#
 @app.route('/comentarios', methods=["GET", "POST"])
-@login_required
 def inicioC():
     form = formularioC()
     return render('comentarios.html', form = form)
@@ -363,7 +387,6 @@ def eliminarC():
 #----------------------------------------CREAR USUSARIO  ---------------------------------------------#
 
 @app.route('/user', methods=["GET", "POST"])
-@login_required
 def inicioU():
     form = formularioU()
     return render('usuarios.html', form = form)
@@ -386,16 +409,56 @@ def guardarU():
             with sqlite3.connect("database.db") as conn:
                 cur = conn.cursor()
                 cur.execute(
-                    "INSERT INTO comentarios (id, nombre, usuario, contraseña,correo,nacimiento,telefono,direccion,rol) VALUES (?,?,?,?,?,?,?,?,?)", 
-                (docum, nombre,usuario,contraseña,correo,nacimiento,telefono,direccion,rol)
+                    "INSERT INTO usuarios (id, nombre, usuario, contraseña,correo,nacimiento,telefono,direccion,rol) VALUES (?,?,?,?,?,?,?,?,?)", 
+                (docum, nombre,usuario,generate_password_hash(contraseña),correo,nacimiento,telefono,direccion,rol)
                 )
                 conn.commit()
                 return "<h1>¡Comentario guardado exitosamente!</h1>"
         return "No se pudo guardar T_T"   
 
 #----------------------------------------VER USUSARIO  ---------------------------------------------#
+@app.route('/usuarios/actualizar/', methods=["POST"])
+def actualizarU():
+    
+    form = formularioU()#Instancia de la clase en formulario.py
+    if request.method == "POST":
+        docum = form.documento.data# docu es vuelos
+        nombre = form.nombre.data
+        usuario = form.usuario.data
+        contraseña = form.contraseña.data
+        correo = form.correo.data
+        nacimiento = form.nacimiento.data
+        telefono = form.telefono.data
+        direccion = form.direccion.data
+        rol = form.rol.data
+        
+        with sqlite3.connect("database.db") as conn:
+            cur = conn.cursor()
+            cur.execute(
+                "UPDATE usuarios SET nombre = ?, usuario = ?, contraseña = ?,correo = ? ,nacimiento = ? ,telefono = ? ,direccion = ? ,rol = ?  WHERE id = ?",
+            (docum, nombre,usuario,generate_password_hash(contraseña),correo,nacimiento,telefono,direccion,rol)
+             )
+            conn.commit()#Confirmación de inserción de datos :)
+            return "¡Datos actualizados exitosamente ^v^!"
+    return "No se pudo actualizar T_T"
 #------------------------------
-'''@app.before_app_request
+
+@app.route('/usuarios/visualizar/', methods=["POST"])
+def visualizarU():
+    form = formularioU()
+    if request.method == "POST":
+        docum = form.documento.data
+        with sqlite3.connect("database.db") as conn:#conexion
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM usuarios WHERE id = ?", [docum])
+            row = cur.fetchone()
+            if row is None:
+                return "No se encontró el registro en la base de datos...... :'( "
+            return render_template("vistausuarios.html", row = row)
+    return "Error"
+
+#------------------------------
 def load_logged_in_user():
     user_id = session.get('user_id')
 
@@ -404,7 +467,7 @@ def load_logged_in_user():
     else:
         g.user = get_db().execute(
             'SELECT * FROM usuarios WHERE id = ?', (user_id,)
-        ).fetchone()'''
+        ).fetchone()
 
 @app.route('/logout')
 def logout():

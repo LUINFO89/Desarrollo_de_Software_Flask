@@ -37,3 +37,16 @@ function actualizarC(){
     document.getElementById("IdFormularioC").action="/comentarios/actualizar/";
 }
 
+//FUNCIONES USUARIOS
+function guardarU(){
+    document.getElementById("IdFormularioU").action="/usuarios/guardar/";
+}
+function visualizarU(){
+    document.getElementById("IdFormularioU").action="/usuarios/visualizar/";
+}
+function eliminarU(){
+    document.getElementById("IdFormularioU").action="/usuarios/eliminar/";
+}
+function actualizarU(){
+    document.getElementById("IdFormularioU").action="/usuarios/actualizar/";
+}
