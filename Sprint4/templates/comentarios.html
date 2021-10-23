@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+
+{% block contenido%}
+        <div class="general">
+
+
+            <div class="form">
+                    <h1>SUGERENCIAS Y COMENTARIOS </h1>
+                    <fieldset >
+                    <form action="/comentarios/guardar/" id="IdFormularioC" method="POST">
+                        {{ form.hidden_tag() }}<!--Evitar ataques de CRSF SIDE FORGUETTY-->
+                        <div>
+                            {{ form.documento.label }}
+                            {{ form.documento() }}
+<<<<<<< HEAD
+                        
+=======
+                        </div>
+                        <div>
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
+                            {{ form.nombre.label }}
+                            {{ form.nombre() }}
+                        </div>
+                        <div>
+                            {{ form.lugar.label }}
+                            {{ form.lugar() }}
+<<<<<<< HEAD
+                        
+                            {{ form.mensaje.label }}
+                            {{ form.mensaje() }}
+                        </div>
+                        <hr>
+            
+=======
+                        </div>
+                        <div>
+                            {{ form.mensaje.label }}
+                            {{ form.mensaje() }}
+                        </div>
+                        
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
+                        <div>
+                            {{form.botonEliminar()}}
+                            {{form.botonActualizar()}}
+                            {{form.botonCrear()}}
+                            {{form.botonVisualizar()}}
+                        </div>
+                    </form>
+                    </fieldset>
+                    
+                </form>
+                <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
+
+            </div>
+        </div>   
+{% endblock %}
