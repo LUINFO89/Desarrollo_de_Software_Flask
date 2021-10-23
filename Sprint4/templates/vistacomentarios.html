@@ -7,61 +7,35 @@
                 <table border="1">
                     <tr>
                         <td>
-                            COMENTARIOS
+                            IDENTIFICACION
                         </td>
                         <td>
-                            VUELO
+                            NOMBRE PASAJERO
                         </td>
                         <td>
-                            AEROLINEA                        </td>
-                        <td>
-                            HORA
+                            LUGAR DE DESTINO                        
                         </td>
                         <td>
-                            DESTINO
+                            COMENTARIO USUARIO
                         </td>
-                        <td>
-                            HORA DESTINO
-                        </td>
-                        <td>
-                            OBSERVACION
-                        </td>
-                        <td>
-                            PILOTO
-                        </td>
-                        <td>
-                            CAPACIDAD
-                        </td>
+                       
+                        
                     </tr>
                     {% if row %}
                     <tr>
                         <td>
-                            {{ row["id"] }}
+                            {{ row["ID"] }}
                         </td>
                         <td>
-                            {{ row["vuelo"] }}
+                            {{ row["NOMBREVIAJERO"] }}
                         </td>
                         <td>
-                            {{ row["aerolinea"] }}
+                            {{ row["LUGARDEVUELO"] }}
                         </td>
                         <td>
-                            {{ row["hora"] }}
+                            {{ row["MENSAJE"] }}
                         </td>
-                        <td>
-                            {{ row["destino"] }}
-                        </td>
-                        <td>
-                            {{ row["horadestino"] }}
-                        </td>
-                        <td>
-                            {{ row["observacion"] }}
-                        </td>
-                        <td>
-                            {{ row["piloto"] }}
-                        </td>
-                        <td>
-                            {{ row["capacidad"] }}
-                        </td>
+                        
                     </tr>
                     {% endif %}
                 </table>

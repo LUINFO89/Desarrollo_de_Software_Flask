@@ -284,7 +284,7 @@ def visualizarC():
             row = cur.fetchone()
             if row is None:
                 return "No se encontró el registro en la base de datos...... :'( "
-            return render_template("vistaVuelos.html", row = row)
+            return render_template("vistacomentarios.html", row = row)
     return "Error"
 
 #----------------------------------------INICIO CRUD COMENTARIOS ------------------------------------------------#
@@ -309,7 +309,7 @@ def guardarC():
                 #se va a usar el PreparedStatement
                 #Acciones
                 cur.execute(
-                    "INSERT INTO comentarios (idcomentarios, NOMBREVIAJERO, LUGARDEVUELO, MENSAJE) VALUES (?,?,?,?)", 
+                    "INSERT INTO comentarios (ID, NOMBREVIAJERO, LUGARDEVUELO, MENSAJE) VALUES (?,?,?,?)", 
                 (docum, nombre, lugar, mensaje)
                 )
                 conn.commit()#Confirmación de inserción de datos :)
@@ -330,7 +330,7 @@ def actualizarC():
         with sqlite3.connect("database.db") as conn:
             cur = conn.cursor()
             cur.execute(
-                "UPDATE comentarios SET NOMBREVIAJERO = ?, LUGARDEVUELO = ?, MENSAJE = ? WHERE idcomentarios = ?",
+                "UPDATE comentarios SET NOMBREVIAJERO = ?, LUGARDEVUELO = ?, MENSAJE = ? WHERE ID = ?",
              [docum, nombre, lugar, mensaje]
              )
             conn.commit()#Confirmación de inserción de datos :)
@@ -347,7 +347,7 @@ def eliminarC():
         with sqlite3.connect("database.db") as conn:
             conn.row_factory = sqlite3.Row
             cur = conn.cursor()#manipula la db
-            cur.execute("DELETE FROM comentarios WHERE idcomentarios = ?", [docum])
+            cur.execute("DELETE FROM comentarios WHERE ID = ?", [docum])
             if conn.total_changes > 0:
                 return "Comentario  borrado ^v^"
             return render_template("comentarios.html")

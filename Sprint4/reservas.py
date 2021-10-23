@@ -1,17 +1,4 @@
 
-# Documento => StringField
-# nombre => StringField
-# lugardesde => SelectField
-# hasta  => SelectField
-# fecha => StringField
-# salida => StringField
-# regreso => StringField
-# cantidadpasajeros => StringField
-
-# BotonCrear => SubmitField
-# BotonActualizar => SubmitField
-# BotonEliminar => SubmitField
-# BotonVisualizar => SubmitField
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField, DateField
 from wtforms.validators import DataRequired
@@ -21,9 +8,9 @@ class formularioI(FlaskForm):
     nombre = StringField("Nombre")
     lugardesde = SelectField("lugardesde", choices=[("Bogota"), ("Medellin"), ("Cali"), ("Barranquilla"), ("Cartagena")])
     hasta = SelectField("hasta", choices=[("Barranquilla"), ("Medellin"), ("Cali"), ("Bogota"), ("Cartagena")])
-    salida = StringField("salida")
-    regreso = StringField("regreso")
-    cantidadpasajeros = StringField("cantidad")
+    salida = DateField("Fecha de salida")
+    regreso = DateField("Fecha de regreso")
+    cantidadpasajeros = StringField("Cantidad de pasajeros a volar")
 
     botonCrear = SubmitField("botonCrear", render_kw={"onmouseover": "guardar()"})
     botonEliminar = SubmitField("botonEliminar", render_kw={"onmouseover": "eliminar()"})

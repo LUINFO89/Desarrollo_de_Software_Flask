@@ -24,16 +24,16 @@ function actualizarV(){
     document.getElementById("IdFormularioV").action="/vuelos/actualizar/";
 }
 //FUNCIONES COMENTARIOS
-function guardarV(){
+function guardarC(){
     document.getElementById("IdFormularioC").action="/comentarios/guardar/";
 }
-function visualizarV(){
+function visualizarC(){
     document.getElementById("IdFormularioC").action="/comentarios/visualizar/";
 }
-function eliminarV(){
+function eliminarC(){
     document.getElementById("IdFormularioC").action="/comentarios/eliminar/";
 }
-function actualizarV(){
+function actualizarC(){
     document.getElementById("IdFormularioC").action="/comentarios/actualizar/";
 }
 

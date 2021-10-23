@@ -1,6 +1,6 @@
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField,TextField
+from wtforms import StringField, SelectField, SubmitField,TextField,TextAreaField
 from wtforms.validators import DataRequired
 
 class formularioV(FlaskForm):
@@ -23,13 +23,13 @@ class formularioC(FlaskForm):
     documento = StringField("Identificacion:", validators=[DataRequired(message="No dejar vacío este campo...")])
     nombre = StringField("Nombre:")
     lugar = SelectField("Lugar de Destino:", choices=[("Barranquilla"), ("Bogota"), ("Medellin"), ("Cali"), ("Cartagena")])
-    mensaje = TextField("Mensaje , sujerencia o reconocimiento:")
+    mensaje = TextAreaField("Mensaje , sujerencia o reconocimiento:")
     
 
-    botonCrear = SubmitField("botonCrear", render_kw={"onmouseover": "guardarC()"})
-    botonEliminar = SubmitField("botonEliminar", render_kw={"onmouseover": "eliminarC()"})
-    botonActualizar = SubmitField("botonActualizar", render_kw={"onmouseover": "actualizarC()"})
-    botonVisualizar = SubmitField("Ver Vuelos ", render_kw={"onmouseover": "visualizarC()"})
+    botonCrear = SubmitField("Crear", render_kw={"onmouseover": "guardarC()"})
+    botonEliminar = SubmitField("Eliminar", render_kw={"onmouseover": "eliminarC()"})
+    botonActualizar = SubmitField("Actualizar comentario", render_kw={"onmouseover": "actualizarC()"})
+    botonVisualizar = SubmitField("Ver ComentarioS ", render_kw={"onmouseover": "visualizarC()"})
 
 
 class formularioU(FlaskForm):
