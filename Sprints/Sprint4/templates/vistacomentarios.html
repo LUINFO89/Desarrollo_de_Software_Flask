@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+
+{% block contenido%}
+        <div class="general">
+
+                <table border="1">
+                    <tr>
+                        <td>
+<<<<<<< HEAD
+                            IDENTIFICACION
+                        </td>
+                        <td>
+                            NOMBRE VIAJERO
+                        </td>
+                        <td>
+                            LUGAR DE VUELO                        </td>
+                        <td>
+                            MENSAJE
+                        </td>
+    
+=======
+                            COMENTARIOS
+                        </td>
+                        <td>
+                            VUELO
+                        </td>
+                        <td>
+                            AEROLINEA                        </td>
+                        <td>
+                            HORA
+                        </td>
+                        <td>
+                            DESTINO
+                        </td>
+                        <td>
+                            HORA DESTINO
+                        </td>
+                        <td>
+                            OBSERVACION
+                        </td>
+                        <td>
+                            PILOTO
+                        </td>
+                        <td>
+                            CAPACIDAD
+                        </td>
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
+                    </tr>
+                    {% if row %}
+                    <tr>
+                        <td>
+<<<<<<< HEAD
+                            {{ row["idcomentarios"] }}
+                        </td>
+                        <td>
+                            {{ row["NOMBREVIAJERO"] }}
+                        </td>
+                        <td>
+                            {{ row["LUGARDEVUELO"] }}
+                        </td>
+                        <td>
+                            {{ row["MENSAJE"] }}
+                        </td>
+                        
+                       
+                    
+=======
+                            {{ row["id"] }}
+                        </td>
+                        <td>
+                            {{ row["vuelo"] }}
+                        </td>
+                        <td>
+                            {{ row["aerolinea"] }}
+                        </td>
+                        <td>
+                            {{ row["hora"] }}
+                        </td>
+                        <td>
+                            {{ row["destino"] }}
+                        </td>
+                        <td>
+                            {{ row["horadestino"] }}
+                        </td>
+                        <td>
+                            {{ row["observacion"] }}
+                        </td>
+                        <td>
+                            {{ row["piloto"] }}
+                        </td>
+                        <td>
+                            {{ row["capacidad"] }}
+                        </td>
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
+                    </tr>
+                    {% endif %}
+                </table>
+                <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
+
+
+        </div>   
+
+    {% endblock %}

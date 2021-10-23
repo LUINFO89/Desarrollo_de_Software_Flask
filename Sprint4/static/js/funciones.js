@@ -24,35 +24,16 @@ function actualizarV(){
     document.getElementById("IdFormularioV").action="/vuelos/actualizar/";
 }
 //FUNCIONES COMENTARIOS
-function guardarC(){
+function guardarV(){
     document.getElementById("IdFormularioC").action="/comentarios/guardar/";
 }
-function visualizarC(){
+function visualizarV(){
     document.getElementById("IdFormularioC").action="/comentarios/visualizar/";
 }
-function eliminarC(){
+function eliminarV(){
     document.getElementById("IdFormularioC").action="/comentarios/eliminar/";
 }
-function actualizarC(){
+function actualizarV(){
     document.getElementById("IdFormularioC").action="/comentarios/actualizar/";
 }
-<<<<<<< HEAD
-//FUNCIONES USUARIOS
-function guardarU(){
-    document.getElementById("IdFormularioU").action="/user/guardar/";
-}
-function visualizarU(){
-    document.getElementById("IdFormularioU").action="/user/visualizar/";
-}
-function eliminarU(){
-    document.getElementById("IdFormularioU").action="/user/eliminar/";
-}
-function actualizarU(){
-    document.getElementById("IdFormularioU").action="/user/actualizar/";
-}
 
-=======
-function iniciarSesion(){
-    document.getElementById("formularioA").action="/login";
-}
->>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39

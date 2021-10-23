@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='js/validacion.js') }}"></script>
+    <title>Formulario de registro</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/miEstilo.css') }}"/>
+    <link rel="stylesheet" type="text/js" href="{{ url_for('static', filename='js/validacion.js') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='images/view.png') }}"> 
+</head>
+<body>
+    
+    <h1>Registro para vacunacion COVID-19</h1>
+    <form  name="formRegistro" onsubmit="validar_formulario()">
+        <fieldset>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" required> <br/> <br/>
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos"> <br/> <br/>
+            <label for="sexo">Sexo</label>
+            <input type="radio" name="sex" id="sex">mujer</input>
+            <input type="radio" name="sex" id="sex2">hombre</input> <br/> <br/>
+            <label for="correo">Correo</label>
+            <input type="email" id="email" required> <br/> <br/>
+            <label for="contrasena">Contraseña</label>
+            <input type="text" id="contrasena" required>
+            <img class="imgOjitoPassword" src="/static/images/eye.png" alt="" onmouseover="mostrarPassword()" onmouseout="ocultarPassword()"> <br/> <br/>
+            <input type="checkbox" id="declaracion">Declaro haber leído y aceptar las
+            condiciones generales del programa y la normativa sobre protección de datos</input><br/> <br/>
+            <!-- <button type="button"  onclick="validar_formulario()">Enviar</button> -->
+            <button type="submit">Enviar</button>
+        </fieldset>
+
+    </form>
+</body>
+</html>

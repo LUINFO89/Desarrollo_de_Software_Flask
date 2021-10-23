@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+
+{% block contenido%}
+        <div class="general">
+
+
+            <div class="form">
+                    <h1>RESERVA TU VUELO</h1>
+<<<<<<< HEAD
+                    <fieldset >
+=======
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
+                    <form action="/reservas/guardar/" id="IdFormulario" method="POST">
+                        {{ form.hidden_tag() }}<!--Evitar ataques de CRSF SIDE FORGUETTY-->
+                        <div>
+                            {{ form.documento.label }}
+                            {{ form.documento() }}
+                        </div>
+                        <div>
+                            {{ form.nombre.label }}
+                            {{ form.nombre() }}
+                        </div>
+                        <div>
+                            {{ form.lugardesde.label }}
+                            {{ form.lugardesde() }}
+                        </div>
+                        <div>
+                            {{ form.hasta.label }}
+                            {{ form.hasta() }}
+                        </div>
+                        <div>
+                            {{ form.salida.label }}
+                            {{ form.salida() }}
+                        </div>
+                        <div>
+                            {{ form.regreso.label }}
+                            {{ form.regreso() }}
+                        </div>
+                        <div>
+                            {{ form.cantidadpasajeros.label }}
+                            {{ form.cantidadpasajeros() }}
+                        </div>
+                        <div>
+                            {{form.botonEliminar()}}
+                            {{form.botonActualizar()}}
+                            {{form.botonCrear()}}
+                            {{form.botonVisualizar()}}
+                        </div>
+                    </form>
+<<<<<<< HEAD
+                    </fieldset>
+=======
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
+                    
+                </form>
+                <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
+
+            </div>
+        </div>   
+{% endblock %}

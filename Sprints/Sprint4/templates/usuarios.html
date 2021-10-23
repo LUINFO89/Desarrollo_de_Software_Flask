@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+
+{% block contenido%}
+<div class="general">
+
+<<<<<<< HEAD
+    <section class="formularioUsuarios">
+         
+            <h1>USUARIOS</h1>
+            <div class="form">
+                
+                    <form action="/usuarios/guardar/" id="IdFormularioU" method="POST">
+                        {{ form.hidden_tag() }}<!--Evitar ataques de CRSF SIDE FORGUETTY-->
+                        <div>
+                            {{ form.documento.label }}
+                            {{ form.documento() }}
+                            {{ form.nombre.label }}
+                            {{ form.nombre() }}
+                        </div>
+                        <div>
+                            {{ form.usuario.label }}
+                            {{ form.usuario() }}
+                            {{ form.contraseña.label }}
+                            {{ form.contraseña() }}
+                        </div>
+                        <div>
+                            {{ form.correo.label }}
+                            {{ form.correo() }}
+                            {{ form.nacimiento.label }}
+                            {{ form.nacimiento() }}
+                        </div>
+                        <div>
+                            {{ form.telefono.label }}
+                            {{ form.telefono() }}
+                            {{ form.direccion.label }}
+                            {{ form.direccion() }}
+                        </div>
+                        <div>
+                            {{ form.rol.label }}
+                            {{ form.rol() }}
+                            
+                        </div>
+                        
+
+                        
+                        <div>
+                            {{form.botonActualizar()}}
+                            {{form.botonVisualizar()}}
+                        </div>
+                    </form>
+                <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
+            </div>
+    </section>
+</div>
+
+{% endblock %}
+=======
+    <section class="formularioRegistro">
+         
+            <h1>MODIFICAR USUARIO</h1>
+            <div class="form">
+                <form  name="formUser" onsubmit="" action="/usuarios" method="POST">
+                    <fieldset>
+                        {{ csrf_tokem }}
+                        <img src="{{ url_for('static', filename='images/face2.jpg') }}" alt=""><br>
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" required> <br/> <br/>
+                        <label for="correo">Correo</label>
+                        <input type="email" id="email" required> <br/> <br/>
+                        <label for="contrasena">Contraseña</label>
+                        <input type="text" id="contrasena" required>
+                        <select name="tipo" id="">
+                            <option value="PIloto"> Piloto</option>
+                            <option value="PIloto"> Viajero frecuente </option>
+                        </select>
+
+                        <button type="submit" onclick ="alert('usuario guardado')"  >Guardar</button>
+                    </fieldset>
+                </form>
+                <li class="nav__items"><a href="/menu" class="nav__links">Regresar a Menu principal</a></li>  
+
+            </div>
+            </section>
+    </div>
+
+    {% endblock %}
+>>>>>>> 10f8323a5894a60206c85d9f718cff6667014b39
