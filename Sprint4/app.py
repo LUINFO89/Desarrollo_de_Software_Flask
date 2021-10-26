@@ -37,7 +37,7 @@ def registro():
             error = None
             db = get_db()
             db.executescript(
-                "INSERT INTO usuarios   (nombre, usuario,correo,contraseña) VALUES ('%s','%s','%s','%s')"%(name,username,email,generate_password_hash(password))
+                "INSERT INTO usuarios   (nombre, usuario,correo,contra) VALUES ('%s','%s','%s','%s')"%(name,username,email,generate_password_hash(password))
             )
             db.commit()
             return "usuario guardado exitosamente"
@@ -50,7 +50,8 @@ def registro():
 
 @app.route( '/login', methods=('GET', 'POST') )
 def login():
-
+    
+        
         if request.method == 'POST':
             db = get_db()
             error = None
@@ -68,22 +69,27 @@ def login():
                 return render_template( 'login.html' )
     
             user = db.execute(
-                'SELECT * FROM usuarios WHERE usuario = ? AND contraseña = ?', (username, password)
+                'SELECT * FROM usuarios WHERE usuario = ? AND contra = ?', (username, password)
             ).fetchone()
 
             if user is None:
+                print(user)
                 user = db.execute(
                     'SELECT * FROM usuarios WHERE usuario = ?', (username,)
                 ).fetchone()
                 if user is None:
                     error = 'Usuario no existe'
                 else:
+                    print(user)
+
                     #Validar contraseña hash            
                     store_password = user[4]
                     result = check_password_hash(store_password, password)
                     if result is False:
                         error = 'Contraseña inválida'
                     else:
+                        print(user)
+
                         session.clear()
                         session['user_id'] = user[0]
                         resp = make_response( redirect( url_for( 'menu' ) ) )
@@ -92,11 +98,13 @@ def login():
                     flash( error )
             else:
                 session.clear()
-                session['user_id'] = user['id']
+                session['user_id'] = user[0]
                 return redirect( url_for( 'menu' ) )
+                
             flash( error )
             
         return render_template( 'login.html' )
+
    
 
 #------------------------------
